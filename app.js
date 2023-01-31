@@ -1,12 +1,29 @@
 const defaultResult = 0;
 let currentResult = defaultResult;
+let operator = 0;
 let calculationDescription = "";
 
 // *******************************
 // FUNCTIONS
 // *******************************
-function add(num1, num2) {
-    currentResult = currentResult + parseFloat(userInput.value);
+
+// -------------------------------
+// DO the Math  function
+//--------------------------------
+function doTheMath(num1, num2) {
+    if (operator === 1) {
+        operatorStr = "+";
+        currentResult = currentResult + parseFloat(userInput.value);
+    } else if (operator === 2) {
+        operatorStr = "-";
+        currentResult = currentResult - parseFloat(userInput.value);
+    } else if (operator === 3) {
+        operatorStr = "*";
+        currentResult = currentResult * parseFloat(userInput.value);
+    } else if (operator === 4) {
+        operatorStr = "/";
+        currentResult = currentResult / parseFloat(userInput.value);
+    }
     // BELOW is the error catching routine so that NaN is not displayed
     // IN every math function
     if (Number.isNaN(currentResult)) {
@@ -14,63 +31,31 @@ function add(num1, num2) {
         currentResult = 0;
         return;
     }
+
     calculationDescription =
-        calculationDescription + " + " + parseFloat(userInput.value);
+        calculationDescription +
+        " " +
+        operatorStr +
+        " " +
+        parseFloat(userInput.value);
     negative();
     outputResult(currentResult, calculationDescription);
 }
 
-function subtract(num1, num2) {
-    currentResult = currentResult - parseFloat(userInput.value);
-    if (Number.isNaN(currentResult)) {
-        calculationDescription = "";
-        currentResult = 0;
-        return;
-    }
-    calculationDescription = `${calculationDescription} - ${parseFloat(
-    userInput.value
-  )}`;
-    negative();
-    outputResult(currentResult, calculationDescription);
-}
-
-function multiply(num1, num2) {
-    currentResult = currentResult * parseFloat(userInput.value);
-    if (Number.isNaN(currentResult)) {
-        calculationDescription = "";
-        currentResult = 0;
-        return;
-    }
-    calculationDescription = `${calculationDescription} * ${parseFloat(
-    userInput.value
-  )}`;
-    negative();
-    outputResult(currentResult, calculationDescription);
-}
-
-function divide(num1, num2) {
-    currentResult = currentResult / parseFloat(userInput.value);
-    if (Number.isNaN(currentResult)) {
-        calculationDescription = "";
-        currentResult = 0;
-        return;
-    }
-    calculationDescription = `${calculationDescription} / ${parseFloat(
-    userInput.value
-  )}`;
-    negative();
-    outputResult(currentResult, calculationDescription);
-}
-
-function clear() {
+// -------------------------------
+// CLEAR function
+//--------------------------------
+function clearEnt() {
     currentResult = 0;
     calculationDescription = "";
     outputResult(currentResult, calculationDescription);
     document.getElementById("input-number").value = "";
     document.getElementById("current-result").style.color = "black";
-    userInput.clear();
+    // userInput.clear();
 }
-
+// -------------------------------
+// CHECK function for negative
+//--------------------------------
 function negative() {
     if (currentResult < 0) {
         document.getElementById("current-result").style.color = "red";
@@ -81,11 +66,27 @@ function negative() {
     }
     return;
 }
+// add the listener to each button and calls the appropriate mathematical function
+addBtn.addEventListener("click", function() {
+    operator = 1;
 
-addBtn.addEventListener("click", add);
-subtractBtn.addEventListener("click", subtract);
-multiplyBtn.addEventListener("click", multiply);
-divideBtn.addEventListener("click", divide);
-clearBtn.addEventListener("click", clear);
+    doTheMath();
+});
+subtractBtn.addEventListener("click", function() {
+    operator = 2;
+    doTheMath();
+});
+multiplyBtn.addEventListener("click", function() {
+    operator = 3;
+    doTheMath();
+});
+divideBtn.addEventListener("click", function() {
+    operator = 4;
+    doTheMath();
+});
+clearBtn.addEventListener("click", clearEnt);
 
 // above using backtick and $ allows for value to be in curlybrace called template literal
+
+//TODO refactor the complete app
+//TODO make the app screen work better for phone
