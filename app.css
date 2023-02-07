@@ -17,6 +17,7 @@ header {
     color: green;
     padding: 1rem;
     text-align: center;
+    text-shadow: 4px 4px gray;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
     width: 100%;
 }
@@ -60,9 +61,10 @@ header {
     font: inherit;
     background: green;
     color: white;
-    border: 1px solid #023d6d;
+    border: 2px solid black;
     padding: 1rem;
     cursor: pointer;
+    box-shadow: 15px 7px 8px gray;
 }
 
 #calculator .btn-clr {
@@ -86,7 +88,8 @@ header {
 }
 
 #calc-actions button {
-    width: 4rem;
+    width: 4.5rem;
+    margin: 1rem 0.75rem 1rem, 0.75rem;
 }
 
 #calc-actions {

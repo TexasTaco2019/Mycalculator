@@ -88,5 +88,4 @@ clearBtn.addEventListener("click", clearEnt);
 
 // above using backtick and $ allows for value to be in curlybrace called template literal
 
-//TODO refactor the complete app
 //TODO make the app screen work better for phone
